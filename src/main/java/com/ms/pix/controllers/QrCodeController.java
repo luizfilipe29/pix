@@ -1,7 +1,8 @@
 package com.ms.pix.controllers;
 
 import com.google.zxing.WriterException;
-import com.ms.pix.entities.QrCode;
+import com.ms.pix.dtos.PaymentAmountDto;
+import com.ms.pix.services.PaymentService;
 import com.ms.pix.services.QrCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +20,9 @@ public class QrCodeController {
     @Autowired
     private QrCodeService qrCodeService;
 
+    @Autowired
+    private PaymentService paymentService;
+
 
     @PostMapping("/generateQrCode")
     public ResponseEntity<byte[]> generateQrCode(@RequestBody String amount) {
@@ -33,5 +37,9 @@ public class QrCodeController {
         }
     }
 
+    @PostMapping("/receivePayment")
+    public void receiveOrderPayment(@RequestBody PaymentAmountDto paymentAmountDto) {
+        paymentService.paymentReceive(paymentAmountDto);
+    }
 
 }
