@@ -13,4 +13,5 @@ public class PaymentAmountDto {
     private Long orderId;
     private BigDecimal amount;
     private PaymentStatus paymentStatus;
+    private UserDto user;
 }
